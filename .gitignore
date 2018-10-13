@@ -1,1 +1,7 @@
 /.idea/
+
+/node_modules/*
+
+!.htaccess
+
+/docker-compose.override.yml
