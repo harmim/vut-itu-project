@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<meta name="author" content="Dominik Harmima">
+	<meta name="description" content="TODO list for Buddy members of ESN organization.">
+	<meta name="keywords" content="todo, todo-list, esn, buddy, internation, esn">
+
+	<title>TODO list | ESN TODO list</title>
+
+	<link rel="icon" type="image/x-icon" href="./../favicon.ico">
+
+	<link rel="stylesheet" type="text/css" href="./../../node_modules/bootstrap/dist/css/bootstrap.css">
+	<link rel="stylesheet" type="text/css" href="./../../node_modules/@fortawesome/fontawesome-free/css/all.css">
+	<link rel="stylesheet" type="text/css" href="./../css/main.css">
+</head>
+<body>
+	<header>
+		<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+			<a class="navbar-brand" href="./assigned-students.html">
+				<img src="./../img/logo.png" alt="logo" width="70">
+			</a>
+
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
+					aria-controls="navbarCollapse" aria-expanded="false" aria-label="Expand navbar">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+
+			<div class="collapse navbar-collapse" id="navbarCollapse">
+				<ul class="navbar-nav mr-auto">
+					<li class="nav-item">
+						<a class="nav-link" href="./assigned-students.html">Assigned students</a>
+					</li>
+				</ul>
+
+				<ul class="navbar-nav float-lg-right">
+					<li class="nav-item">
+						<a class="nav-link" href="./login.html">Log out <i class="fas fa-sign-out-alt"></i></a>
+					</li>
+				</ul>
+			</div>
+		</nav>
+	</header>
+
+	<main class="container">
+		<div class="row">
+			<div class="col">
+				<h4 class="mb-3">TODO list for student: <i>Sebastián San Martín</i></h4>
+
+				<hr class="mb-3">
+
+				<div class="row">
+					<div class="col-md-6 mb-1">
+						<form>
+							<div class="input-group">
+								<input type="text" class="form-control" placeholder="Student name"
+									   aria-label="Student name" value="Sebastián San Martín">
+								<div class="input-group-append">
+									<button class="btn btn-outline-primary" type="button">Rename student</button>
+								</div>
+							</div>
+						</form>
+					</div>
+
+					<div class="col-md-6">
+						<a class="btn btn-danger text-light"><i class="fas fa-trash-alt"></i> Delete TODO list
+						</a>
+					</div>
+				</div>
+
+				<hr class="mb-3">
+
+				<h5 class="mb-3">Global TODO list</h5>
+
+				<form>
+					<table class="table table-hover todo-list">
+						<tbody>
+							<tr>
+								<td>
+									<div class="custom-control custom-checkbox">
+										<input checked type="checkbox" class="custom-control-input" id="customCheck1">
+										<label class="custom-control-label" for="customCheck1">
+											Lorem ipsum dolor sit amet.
+										</label>
+									</div>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<div class="custom-control custom-checkbox">
+										<input type="checkbox" class="custom-control-input" id="customCheck2">
+										<label class="custom-control-label" for="customCheck2">
+											Nam suscipit tempor urna.
+										</label>
+									</div>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<div class="custom-control custom-checkbox">
+										<input type="checkbox" class="custom-control-input" id="customCheck3">
+										<label class="custom-control-label" for="customCheck3">
+											Lorem ipsum dolor sit amet.
+										</label>
+									</div>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<div class="custom-control custom-checkbox">
+										<input type="checkbox" class="custom-control-input" id="customCheck4">
+										<label class="custom-control-label" for="customCheck4">
+											Nam suscipit tempor urna.
+										</label>
+									</div>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<div class="custom-control custom-checkbox">
+										<input checked type="checkbox" class="custom-control-input" id="customCheck5">
+										<label class="custom-control-label" for="customCheck5">
+											Lorem ipsum dolor sit amet.
+										</label>
+									</div>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<div class="custom-control custom-checkbox">
+										<input type="checkbox" class="custom-control-input" id="customCheck6">
+										<label class="custom-control-label" for="customCheck6">
+											Nam suscipit tempor urna.
+										</label>
+									</div>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</form>
+
+				<hr class="mb-3">
+
+				<h5 class="mb-3">Personal TODO list</h5>
+
+				<div class="row">
+					<div class="col">
+						<form>
+							<div class="input-group">
+								<input type="text" class="form-control" placeholder="Item name"
+									   aria-label="Item name">
+								<div class="input-group-append">
+									<button class="btn btn-outline-success" type="button">Add item</button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+
+				<hr class="mb-3">
+
+				<form>
+					<table class="table table-hover todo-list">
+						<tbody>
+							<tr>
+								<td>
+									<div class="custom-control custom-checkbox">
+										<input checked type="checkbox" class="custom-control-input" id="customCheck7">
+										<label class="custom-control-label" for="customCheck7">
+											Nam suscipit tempor urna.
+										</label>
+									</div>
+								</td>
+								<td>
+									<a class="btn btn-sm btn-danger text-light mb-1">
+										<i class="fas fa-trash-alt"></i>
+									</a>
+									<a href="./edit-item.html" class="btn btn-sm btn-secondary text-light mb-1">
+										<i class="fas fa-edit"></i>
+									</a>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<div class="custom-control custom-checkbox">
+										<input type="checkbox" class="custom-control-input" id="customCheck8">
+										<label class="custom-control-label" for="customCheck8">
+											Lorem ipsum dolor sit amet.
+										</label>
+									</div>
+								</td>
+								<td>
+									<a class="btn btn-sm btn-danger text-light mb-1">
+										<i class="fas fa-trash-alt"></i>
+									</a>
+									<a href="./edit-item.html" class="btn btn-sm btn-secondary text-light mb-1">
+										<i class="fas fa-edit"></i>
+									</a>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<div class="custom-control custom-checkbox">
+										<input type="checkbox" class="custom-control-input" id="customCheck9">
+										<label class="custom-control-label" for="customCheck9">
+											Nam suscipit tempor urna.
+										</label>
+									</div>
+								</td>
+								<td>
+									<a class="btn btn-sm btn-danger text-light mb-1">
+										<i class="fas fa-trash-alt"></i>
+									</a>
+									<a href="./edit-item.html" class="btn btn-sm btn-secondary text-light mb-1">
+										<i class="fas fa-edit"></i>
+									</a>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</form>
+			</div>
+		</div>
+	</main>
+
+	<footer class="footer">
+		<div class="container">
+			<span class="text-muted">
+				©2018 Dominik Harmim | ESN TODO list
+			</span>
+		</div>
+	</footer>
+
+	<script type="application/javascript" defer src="./../../node_modules/jquery/dist/jquery.js"></script>
+	<script type="application/javascript" defer src="./../../node_modules/popper.js/dist/umd/popper.js"></script>
+	<script type="application/javascript" defer src="./../../node_modules/bootstrap/dist/js/bootstrap.js"></script>
+	<script type="application/javascript" defer src="./../../node_modules/jquery-ui-dist/jquery-ui.js"></script>
+	<script type="application/javascript" defer src="./../js/main.js"></script>
+</body>
+</html>
