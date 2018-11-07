@@ -82,7 +82,7 @@ $ make
 U kažédho příkazu je možné uvést `PRODUCTION=1/0` pro nastavení knihoven pro produkční/vývojový server,
 např. `$ make install PRODUCTION=1`. Výchozí hodnota je `0`.
 
-- `install` `composer` `assets`. Výchozí cíl.
+- `install` `composer` + `assets`. Výchozí cíl.
 - `assets` `npm` + `grunt`.
 - `npm` Instalace JavaScript knihoven přes NPM pro nastavování a stahování JavaScript a CSS knihoven systému.
 - `grunt` Kopírování a nastavování (minifikace, aj.) JavaScript a CSS knihoven systému.
