@@ -79,7 +79,7 @@ $ make
 
 
 ### Make příkazy
-U kažédho příkazu je možné uvést `PRODUCTION=1/0` pro a nastavení knihoven pro produkční/vývojový server,
+U kažédho příkazu je možné uvést `PRODUCTION=1/0` pro nastavení knihoven pro produkční/vývojový server,
 např. `$ make install PRODUCTION=1`. Výchozí hodnota je `0`.
 
 - `install` `composer` `assets`. Výchozí cíl.
