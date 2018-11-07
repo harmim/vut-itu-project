@@ -1,6 +1,6 @@
 PRODUCTION := 0
 
-NODE_DIR = node_modules
+NODE_DIR := node_modules
 WWW_DIR := www
 NODE_BIN_DIR := $(NODE_DIR)/.bin
 HTML_DIR := $(WWW_DIR)/html
