@@ -30,7 +30,7 @@ module.exports = function (grunt) {
 				"<%= nodeDir %>/popper.js/dist/umd/popper.js",
 				"<%= nodeDir %>/bootstrap/dist/js/bootstrap.js",
 				"<%= nodeDir %>/jquery-ui-dist/jquery-ui.js",
-				"<%= jsDir %>/main.jss"
+				"<%= jsDir %>/main.js"
 			],
 			css: [
 				"<%= nodeDir %>/bootstrap/dist/css/bootstrap.css",
