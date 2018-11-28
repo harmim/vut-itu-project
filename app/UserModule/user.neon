@@ -5,3 +5,4 @@ services:
 	# Controls
 	- \App\UserModule\Controls\Login\ILoginControlFactory
 	- \App\UserModule\Controls\Registration\IRegistrationControlFactory
+	- \App\UserModule\Controls\UserList\IUserListControlFactory

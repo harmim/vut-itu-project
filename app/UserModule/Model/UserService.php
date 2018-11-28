@@ -60,4 +60,26 @@ final class UserService extends \ITU\Model\BaseService implements \Nette\Securit
 			throw new \App\UserModule\Model\Exception('User with this e-mail is already registered.');
 		}
 	}
+
+
+	public function delete(int $id): void
+	{
+		$this->getTable()->wherePrimary($id)->delete();
+	}
+
+
+	/**
+	 * @throws \App\UserModule\Model\Exception
+	 * @throws \Nette\InvalidArgumentException
+	 */
+	public function changeRole(int $id, string $role): void
+	{
+		if (!\in_array($role, \array_keys(self::ROLE_TRANSLATION_MAP), true)) {
+			throw new \App\UserModule\Model\Exception(\sprintf("Invalid role '%s'.", $role));
+		}
+
+		$this->getTable()->wherePrimary($id)->update([
+			'role' => $role,
+		]);
+	}
 }

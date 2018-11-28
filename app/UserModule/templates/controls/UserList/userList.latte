@@ -1,0 +1,50 @@
+<div n:if="$users" class="table-responsive">
+	<table class="table table-hover table-borderless table-striped">
+		<thead>
+			<tr>
+				<th scope="col">ID</th>
+				<th scope="col">E-mail</th>
+				<th scope="col">Role</th>
+				<th scope="col">Actions</th>
+			</tr>
+		</thead>
+		<tbody n:inner-foreach="$users as $_user">
+			<tr>
+				<th scope="row">{$_user->id}</th>
+
+				<td>{$_user->email}</td>
+
+				<td>
+					<button n:class="btn, btn-primary, btn-sm, dropdown-toggle, $_user->id === $user->id ? disabled"
+							data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" type="button">
+						{\App\UserModule\Model\UserService::ROLE_TRANSLATION_MAP[$_user->role]}
+					</button>
+					<div class="dropdown-menu">
+						{var $adminLabel = \App\UserModule\Model\UserService::ROLE_TRANSLATION_MAP[\App\UserModule\Model\UserService::ROLE_ADMIN]}
+						{var $userLabel = \App\UserModule\Model\UserService::ROLE_TRANSLATION_MAP[\App\UserModule\Model\UserService::ROLE_USER]}
+						{if $_user->role === \App\UserModule\Model\UserService::ROLE_ADMIN}
+							<span class="dropdown-item disabled" href="#">{$adminLabel}</span>
+							<a class="dropdown-item"
+							   n:href="changeRole! $_user->id, \App\UserModule\Model\UserService::ROLE_USER">
+								{$userLabel}
+							</a>
+						{elseif $_user->role === \App\UserModule\Model\UserService::ROLE_USER}
+							<a class="dropdown-item"
+							   n:href="changeRole! $_user->id, \App\UserModule\Model\UserService::ROLE_ADMIN">
+								{$adminLabel}
+							</a>
+							<span class="dropdown-item disabled" href="#">{$userLabel}</span>
+						{/if}
+					</div>
+				</td>
+
+				<td n:inner-if="$_user->id !== $user->id">
+					<a n:href="delete! $_user->id" class="btn btn-sm btn-danger text-light"
+					  data-confirm="Are you sure you want delete this user? If so, all TODO lists belonging to this user will be deleted.">
+						<i class="fas fa-trash-alt"></i>
+					</a>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>

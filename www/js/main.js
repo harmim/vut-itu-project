@@ -1,35 +1,31 @@
 "use strict";
 
 
-let customMain;
-if (typeof customMain === "undefined") {
-	customMain = {};
+let main;
+if (typeof main === "undefined") {
+	main = {};
 }
 
 
-customMain.liveForm = {
+main.liveForm = {
 	init: function () {
 		LiveForm.setOptions({
 			showValid: true,
-			messageErrorPrefix: ''
+			messageErrorPrefix: ""
 		});
 	}
 };
 
 
-customMain.todoList = {
+main.todoList = {
 	init: function () {
 		const $tr = $("table.todo-list tr");
 		if ($tr.length > 0) {
 			$tr.each(this.onInit);
 			$tr.click(this.onItemClick);
-
-			const $a = $tr.find("a");
-			if ($a.length > 0) {
-				$a.click(function (e) {
-					e.stopPropagation();
-				});
-			}
+			$tr.find("a").click(function (e) {
+				e.stopPropagation();
+			});
 		}
 	},
 
@@ -66,16 +62,13 @@ customMain.todoList = {
 };
 
 
-customMain.sortable = {
+main.sortable = {
 	init: function () {
-		const $sortable = $(".sortable");
-		if ($sortable.length > 0) {
-			$sortable.sortable({
-				handle: ".handle"
-				// update: this.sortChanged
-			});
-			// this.setSortValues($sortable);
-		}
+		$(".sortable").sortable({
+			handle: ".handle"
+			// update: this.sortChanged
+		});
+		// this.setSortValues($sortable);
 	},
 
 	sortChanged: function () {
@@ -102,8 +95,29 @@ customMain.sortable = {
 };
 
 
+main.confirmLinks = {
+	init: function () {
+		$("a, button, input[type=button], input[type=submit]").click(function () {
+			if (this.hasAttribute('data-confirm')) {
+				let message;
+				if (this.dataset.confirm) {
+					message = this.dataset.confirm;
+				} else {
+					message = 'Do you really want do this action?';
+				}
+
+				if (!confirm(message)) {
+					return false;
+				}
+			}
+		});
+	}
+};
+
+
 $(function () {
-	customMain.liveForm.init();
-	customMain.todoList.init();
-	customMain.sortable.init();
+	main.liveForm.init();
+	main.todoList.init();
+	main.sortable.init();
+	main.confirmLinks.init();
 });

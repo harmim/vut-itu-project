@@ -36,8 +36,8 @@ final class TemplateLocator implements \ITU\Application\Templates\ITemplateLocat
 		}
 
 		$paths = [];
-		$paths[] = "/$presenterNameMatches[1]Module/Presenters/$view.latte";
 		$paths[] = "/$presenterNameMatches[1]Module/templates/$presenterNameMatches[2]/$view.latte";
+		$paths[] = "/$presenterNameMatches[1]Module/Presenters/$view.latte";
 
 		$list = [];
 		foreach ($this->dirs as $dir) {
@@ -67,6 +67,7 @@ final class TemplateLocator implements \ITU\Application\Templates\ITemplateLocat
 		$paths = [];
 		$paths[] = "/$presenterNameMatches[1]Module/templates/$presenterNameMatches[2]/@$layout.latte";
 		$paths[] = "/$presenterNameMatches[1]Module/templates/@$layout.latte";
+		$paths[] = "/$presenterNameMatches[1]Module/Presenters/@$layout.latte";
 		if ($presenterNameMatches[1] !== $this->defaultModuleWithLayout) {
 			$paths[] = "/{$this->defaultModuleWithLayout}Module/templates/@$layout.latte";
 		}
@@ -93,13 +94,11 @@ final class TemplateLocator implements \ITU\Application\Templates\ITemplateLocat
 		$list = [];
 		foreach ($this->dirs as $dir) {
 			if (\Nette\Utils\Strings::startsWith($controlDir, $dir)) {
-				$list[] = "$controlDir/$templateName";
-
-				$controlDir = \substr($controlDir, \strlen((string) \realpath($dir)));
-				$endString = 'Controls' . \DIRECTORY_SEPARATOR . \ucfirst($controlName);
-				if (\Nette\Utils\Strings::endsWith($controlDir, $endString)) {
+				$relativeControlDir = \substr($controlDir, \strlen((string) \realpath($dir)));
+				$subControlDir = 'Controls' . \DIRECTORY_SEPARATOR . \ucfirst($controlName);
+				if (\Nette\Utils\Strings::endsWith($relativeControlDir, $subControlDir)) {
 					$list[] = $dir
-						. \substr($controlDir, 0, -\strlen($endString))
+						. \substr($relativeControlDir, 0, -\strlen($subControlDir))
 						. 'templates'
 						. \DIRECTORY_SEPARATOR
 						. 'controls'
@@ -108,6 +107,8 @@ final class TemplateLocator implements \ITU\Application\Templates\ITemplateLocat
 						. \DIRECTORY_SEPARATOR
 						. $templateName;
 				}
+
+				$list[] = "$controlDir/$templateName";
 			}
 		}
 
