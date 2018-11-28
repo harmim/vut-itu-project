@@ -1,0 +1,16 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<meta name="author" content="Dominik Harmim">
+<meta name="description" content="TODO list for Buddy members of organization ESN.">
+<meta name="keywords" content="php7, nette-framework, user-interface, todo, todo-list, esn, erasmus">
+
+{var $title = !empty($title) ? $title . ' | ' : ''}
+{php $title .= 'ESN TODO list'}
+<title>{$title}</title>
+
+<link rel="icon" type="image/x-icon" href="{$basePath}/favicon.ico">
+
+{foreach $styles as $style}
+	<link rel="stylesheet" type="text/css" n:nonce href="{$basePath . $style}">
+{/foreach}

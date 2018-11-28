@@ -1,1 +1,19 @@
 version: '3'
+
+services:
+    web:
+        environment:
+            ITU_DEBUG: 1
+            XDEBUG_CONFIG: remote_host=docker.for.mac.localhost
+
+    database:
+        environment:
+            MYSQL_ROOT_PASSWORD: root
+            MYSQL_USER: itu
+            MYSQL_PASSWORD: itu
+            MYSQL_DATABASE: vut_itu_project
+
+networks:
+    default:
+        external:
+            name: nginx-proxy

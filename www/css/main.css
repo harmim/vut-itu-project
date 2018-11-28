@@ -14,3 +14,29 @@ body { margin-bottom: 60px; }
 main.container { padding: 5rem 1rem 3rem; }
 .box-shadow { box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05); }
 a.no-decoration { text-decoration: none; }
+
+
+/* Flash messages
+-------------------------------------------------- */
+.alert-error { color: #A94442; background-color: #F2DEDE; border-color: #EBCCD1; }
+.alert-error hr { border-top-color: #E4B9C0; }
+.alert-error .alert-link { color: #843534; }
+
+
+/* Form validation
+-------------------------------------------------- */
+/* disable Bootstrap is-valid */
+.form-control.is-valid, .custom-select.is-valid { border-color: initial !important; }
+.form-control.is-valid:focus, .custom-select.is-valid:focus {
+	border-color: initial !important; box-shadow: initial !important;
+}
+.form-check-input.is-valid ~ .form-check-label { color: initial !important; }
+.custom-control-input.is-valid ~ .custom-control-label { color: initial !important; }
+.custom-control-input.is-valid ~ .custom-control-label::before { background-color: #DEE2E6 !important; }
+.custom-control-input.is-valid:checked ~ .custom-control-label::before { background-color: #157FFB !important; }
+.custom-control-input.is-valid:focus ~ .custom-control-label::before { box-shadow: initial !important; }
+.custom-file-input.is-valid ~ .custom-file-label { border-color: initial !important; }
+.custom-file-input.is-valid:focus ~ .custom-file-label { box-shadow: initial !important; }
+
+form .has-error .form-control { border-color: #DC3545 !important; box-shadow: 0 0 1px #DC3545 !important; }
+form .has-success .form-control { border-color: #28A745 !important; box-shadow: 0 0 1px #28A745 !important; }

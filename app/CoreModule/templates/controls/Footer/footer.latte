@@ -1,0 +1,11 @@
+<div class="container">
+	<span class="text-muted">
+		©{\date('Y')}
+		Dominik Harmim
+		| ESN TODO list
+	</span>
+
+	<span n:if="$user->isLoggedIn() && $identity = $user->getIdentity()" class="text-muted float-right">
+		{$userType}: {$identity->email}
+	</span>
+</div>

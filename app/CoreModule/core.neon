@@ -1,0 +1,11 @@
+services:
+	# Router
+	router: \App\CoreModule\Model\RouterFactory::createRouter
+
+	# Controls
+	-
+		implement: \App\CoreModule\Controls\Head\IHeadControlFactory
+		factory: \App\CoreModule\Controls\Head\HeadControl(%isProductionDomain%, %wwwDir%)
+	- \App\CoreModule\Controls\Header\IHeaderControlFactory
+	- \App\CoreModule\Controls\Footer\IFooterControlFactory
+	- \App\CoreModule\Controls\FlashMessage\IFlashMessageControlFactory

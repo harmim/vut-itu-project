@@ -30,6 +30,7 @@ module.exports = function (grunt) {
 				"<%= nodeDir %>/popper.js/dist/umd/popper.js",
 				"<%= nodeDir %>/bootstrap/dist/js/bootstrap.js",
 				"<%= nodeDir %>/jquery-ui-dist/jquery-ui.js",
+				"<%= nodeDir %>/live-form-validation/live-form-validation.js",
 				"<%= jsDir %>/main.js"
 			],
 			css: [

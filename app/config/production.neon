@@ -1,0 +1,9 @@
+parameters:
+	config:
+		domainUrl: http://vut-itu-project.harmim.cz
+
+	database:
+		host: mariadb.best-hosting.cz
+		user: harmim003
+		password: "wL0781@1|71Cd'U(']5~\"|07-"
+		dbname: harmimcz_db003

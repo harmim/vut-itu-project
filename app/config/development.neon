@@ -1,0 +1,9 @@
+parameters:
+	config:
+		domainUrl: http://vut-itu-project.localhost.com
+
+	database:
+		host: database
+		user: itu
+		password: itu
+		dbname: vut_itu_project

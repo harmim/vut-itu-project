@@ -7,6 +7,16 @@ if (typeof customMain === "undefined") {
 }
 
 
+customMain.liveForm = {
+	init: function () {
+		LiveForm.setOptions({
+			showValid: true,
+			messageErrorPrefix: ''
+		});
+	}
+};
+
+
 customMain.todoList = {
 	init: function () {
 		const $tr = $("table.todo-list tr");
@@ -93,6 +103,7 @@ customMain.sortable = {
 
 
 $(function () {
+	customMain.liveForm.init();
 	customMain.todoList.init();
 	customMain.sortable.init();
 });

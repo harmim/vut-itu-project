@@ -1,6 +1,34 @@
 version: '3'
 
 services:
+    web:
+        build: ./docker/php
+        ports:
+            - 80
+        environment:
+            VIRTUAL_HOST: vut-itu-project.localhost.com
+            PHP_IDE_CONFIG: serverName=vut-itu-project.localhost.com
+        volumes:
+            - ./:/var/www/html:cached
+            - ./docker/apache2/sites-enabled:/etc/apache2/sites-enabled
+            - ./docker/php/xdebug.ini:/usr/local/etc/php/conf.d/xdebug.ini
+        links:
+            - database
+
+    database:
+        image: mariadb:latest
+        volumes:
+            - ./sql:/docker-entrypoint-initdb.d:ro
+
+    adminer:
+        image: adminer:latest
+        ports:
+            - 8080:8080
+        environment:
+            VIRTUAL_HOST: adminer.vut-itu-project.localhost.com
+        links:
+            - database
+
     node:
         image: node:latest
         command: tail -f /dev/null

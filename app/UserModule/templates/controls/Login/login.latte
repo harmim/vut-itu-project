@@ -1,0 +1,32 @@
+<h4 class="mb-3">Log in</h4>
+
+{form loginForm}
+	<div n:foreach="$form->getErrors() as $error" class="alert alert-danger">{$error}</div>
+
+	<div class="form-group">
+		{label email}
+		{input email class => 'form-control'}
+	</div>
+
+	<div class="form-group">
+		{label password}
+		{input password class => 'form-control'}
+	</div>
+
+	<div class="form-group">
+		<label class="custom-control custom-checkbox">
+			<input n:name="remember" class="custom-control-input">
+			<label n:name="remember" class="custom-control-label">Remember me</label>
+		</label>
+	</div>
+
+	<div class="form-group">
+		{input login class => 'btn btn-primary btn-block'}
+	</div>
+{/form}
+
+<hr class="mb-4">
+
+<p>
+	<a href="{plink :User:Registration:default}">Registration</a>
+</p>
