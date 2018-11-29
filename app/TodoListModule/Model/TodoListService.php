@@ -82,7 +82,6 @@ final class TodoListService extends \ITU\Model\BaseService
 				/ ($itemCount + $todoListGlobalItemCount[$id]['global_item_count'])
 				* 100
 			);
-
 		}
 
 		return $statuses;

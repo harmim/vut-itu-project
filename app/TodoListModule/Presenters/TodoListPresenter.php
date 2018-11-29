@@ -29,7 +29,6 @@ final class TodoListPresenter extends \App\CoreModule\Presenters\SecuredPresente
 
 	public function actionDetail(int $id): void
 	{
-
 	}
 
 
