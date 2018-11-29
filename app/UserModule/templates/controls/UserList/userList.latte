@@ -15,7 +15,7 @@
 				<td>{$_user->email}</td>
 
 				<td>
-					<button n:class="btn, btn-primary, btn-sm, dropdown-toggle, $_user->id === $user->id ? disabled"
+					<button n:class="btn, btn-primary, btn-sm, dropdown-toggle, $_user->id === $user->getId() ? disabled"
 							data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" type="button">
 						{\App\UserModule\Model\UserService::ROLE_TRANSLATION_MAP[$_user->role]}
 					</button>
@@ -38,7 +38,7 @@
 					</div>
 				</td>
 
-				<td n:inner-if="$_user->id !== $user->id">
+				<td n:inner-if="$_user->id !== $user->getId()">
 					<a n:href="delete! $_user->id" class="btn btn-sm btn-danger text-light"
 					  data-confirm="Are you sure you want delete this user? If so, all TODO lists belonging to this user will be deleted.">
 						<i class="fas fa-trash-alt"></i>

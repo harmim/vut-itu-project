@@ -1,0 +1,10 @@
+services:
+	# Services
+	- \App\TodoListModule\Model\TodoListService
+	- \App\TodoListModule\Model\TodoListGlobalItemService
+
+	# Controls
+	- \App\TodoListModule\Controls\AddTodoList\IAddTodoListControlFactory
+	- \App\TodoListModule\Controls\AssignedTodoLists\IAssignedTodoListsControlFactory
+	- \App\TodoListModule\Model\TodoListItemService
+	- \App\TodoListModule\Model\TodoListGlobalItemDoneService

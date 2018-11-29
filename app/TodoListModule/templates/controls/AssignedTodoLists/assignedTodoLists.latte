@@ -1,0 +1,18 @@
+{foreach $todoLists as $todoList}
+	{if $iterator->getCounter() % 3 === 1}<div class="row">{/if}
+
+		<div class="col-md-4">
+			<a href="{plink :TodoList:TodoList:detail $todoList->id}" class="no-decoration">
+				<div class="card text-white bg-primary mb-3">
+					<div class="card-header">
+						<span class="float-right">{$todoListsStatuses[$todoList->id]} %</span>
+					</div>
+					<div class="card-body">
+						<h5>{$todoList->name}</h5>
+					</div>
+				</div>
+			</a>
+		</div>
+
+	{if $iterator->getCounter() % 3 === 0 || $iterator->isLast()}</div>{/if}
+{/foreach}

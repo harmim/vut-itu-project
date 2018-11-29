@@ -49,12 +49,12 @@ final class UserService extends \ITU\Model\BaseService implements \Nette\Securit
 	/**
 	 * @throws \App\UserModule\Model\Exception
 	 */
-	public function registerUser(\Nette\Utils\ArrayHash $data): void
+	public function register(string $email, string $password): void
 	{
 		try {
 			$this->getTable()->insert([
-				'email' => $data->email,
-				'password' => \Nette\Security\Passwords::hash($data->password),
+				'email' => $email,
+				'password' => \Nette\Security\Passwords::hash($password),
 			]);
 		} catch (\Nette\Database\UniqueConstraintViolationException $e) {
 			throw new \App\UserModule\Model\Exception('User with this e-mail is already registered.');

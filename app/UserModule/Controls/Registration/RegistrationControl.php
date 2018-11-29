@@ -54,7 +54,7 @@ final class RegistrationControl extends \ITU\Application\UI\BaseControl
 	public function onSuccessRegistrationForm(\Nette\Application\UI\Form $form, \Nette\Utils\ArrayHash $values): void
 	{
 		try {
-			$this->userService->registerUser($values);
+			$this->userService->register($values->email, $values->password);
 		} catch (\App\UserModule\Model\Exception $e) {
 			$form->addError($e->getMessage());
 			return;
