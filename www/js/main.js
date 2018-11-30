@@ -65,32 +65,36 @@ main.todoList = {
 main.sortable = {
 	init: function () {
 		$(".sortable").sortable({
-			handle: ".handle"
-			// update: this.sortChanged
+			handle: ".sort-handle",
+			update: this.sortChanged
 		});
-		// this.setSortValues($sortable);
 	},
 
-	sortChanged: function () {
+	sortChanged: function (event, ui) {
 		const $sortable = $(".sortable");
-		if ($sortable.length > 0) {
-			const $form = $sortable.closest("form");
-			if ($form.length > 0) {
-				$form.trigger("submit");
-			}
-		}
-	},
+		const sortArray = $sortable.sortable("toArray");
 
-	setSortValues: function ($sortable) {
-		const $form = $sortable.closest("form");
-		if ($form.length > 0) {
-			const $hidden = $form.find("input[type=hidden][name=sort]");
-			if ($hidden.length > 0) {
-				$form.submit(function () {
-					$hidden.val(JSON.stringify($sortable.sortable("toArray")));
-				});
+		const itemIdAttr = ui.item.attr("id");
+		const indexOfItem = sortArray.indexOf(itemIdAttr);
+
+		const itemId = parseInt(itemIdAttr.substr(8));
+		const prevItemId = typeof sortArray[indexOfItem - 1] !== "undefined"
+			? parseInt(sortArray[indexOfItem - 1].substr(8))
+			: null;
+		const nextItemId = typeof sortArray[indexOfItem + 1] !== "undefined"
+			? parseInt(sortArray[indexOfItem + 1].substr(8))
+			: null;
+
+		$.ajax({
+			url: $sortable.data("sort-url"),
+			type: "GET",
+			dataType: "json",
+			data: {
+				itemId: itemId,
+				prevItemId: prevItemId,
+				nextItemId: nextItemId
 			}
-		}
+		});
 	}
 };
 
@@ -98,12 +102,12 @@ main.sortable = {
 main.confirmLinks = {
 	init: function () {
 		$("a, button, input[type=button], input[type=submit]").click(function () {
-			if (this.hasAttribute('data-confirm')) {
+			if (this.hasAttribute("data-confirm")) {
 				let message;
 				if (this.dataset.confirm) {
 					message = this.dataset.confirm;
 				} else {
-					message = 'Do you really want do this action?';
+					message = "Do you really want do this action?";
 				}
 
 				if (!confirm(message)) {

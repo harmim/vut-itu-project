@@ -6,22 +6,7 @@ namespace App\TodoListModule\Model;
 
 final class TodoListGlobalItemDoneService extends \ITU\Model\BaseService
 {
-	/**
-	 * @var \App\TodoListModule\Model\TodoListGlobalItemService
-	 */
-	private $todoListGlobalItemService;
-
-
-	public function __construct(
-		\Nette\Database\Context $database,
-		\App\TodoListModule\Model\TodoListGlobalItemService $todoListGlobalItemService
-	) {
-		parent::__construct($database);
-		$this->todoListGlobalItemService = $todoListGlobalItemService;
-	}
-
-
-	public function getTableName(): string
+	public static function getTableName(): string
 	{
 		return 'todo_list_global_item_done';
 	}
@@ -30,17 +15,30 @@ final class TodoListGlobalItemDoneService extends \ITU\Model\BaseService
 	public function createRecordsForNewTodoList(int $todoListId): bool
 	{
 		$globalItemDoneData = [];
-		foreach ($this->todoListGlobalItemService->fetchAll() as $globalItem) {
+		$globalItems = $this->database->table(\App\TodoListModule\Model\TodoListGlobalItemService::getTableName())
+			->fetchAll();
+		foreach ($globalItems as $globalItem) {
 			$globalItemDoneData[] = [
 				'todo_list_global_item_id' => $globalItem->id,
 				'todo_list_id' => $todoListId,
 			];
 		}
 
-		if (!$this->getTable()->insert($globalItemDoneData)) {
-			return false;
+		return (bool) $this->getTable()->insert($globalItemDoneData);
+	}
+
+
+	public function createRecordForNewGlobalItem(int $globalItemId): bool
+	{
+		$globalItemDoneData = [];
+		$todoLists = $this->database->table(\App\TodoListModule\Model\TodoListService::getTableName())->fetchAll();
+		foreach ($todoLists as $todoList) {
+			$globalItemDoneData[] = [
+				'todo_list_global_item_id' => $globalItemId,
+				'todo_list_id' => $todoList->id,
+			];
 		}
 
-		return true;
+		return (bool) $this->getTable()->insert($globalItemDoneData);
 	}
 }

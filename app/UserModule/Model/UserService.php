@@ -15,7 +15,7 @@ final class UserService extends \ITU\Model\BaseService implements \Nette\Securit
 	];
 
 
-	public function getTableName(): string
+	public static function getTableName(): string
 	{
 		return 'user';
 	}
@@ -59,12 +59,6 @@ final class UserService extends \ITU\Model\BaseService implements \Nette\Securit
 		} catch (\Nette\Database\UniqueConstraintViolationException $e) {
 			throw new \App\UserModule\Model\Exception('User with this e-mail is already registered.');
 		}
-	}
-
-
-	public function delete(int $id): void
-	{
-		$this->getTable()->wherePrimary($id)->delete();
 	}
 
 

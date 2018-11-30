@@ -2,9 +2,12 @@ services:
 	# Services
 	- \App\TodoListModule\Model\TodoListService
 	- \App\TodoListModule\Model\TodoListGlobalItemService
+	- \App\TodoListModule\Model\TodoListItemService
+	- \App\TodoListModule\Model\TodoListGlobalItemDoneService
 
 	# Controls
 	- \App\TodoListModule\Controls\AddTodoList\IAddTodoListControlFactory
 	- \App\TodoListModule\Controls\AssignedTodoLists\IAssignedTodoListsControlFactory
-	- \App\TodoListModule\Model\TodoListItemService
-	- \App\TodoListModule\Model\TodoListGlobalItemDoneService
+	- \App\TodoListModule\Controls\AddTodoListItem\IAddTodoListItemControlFactory
+	- \App\TodoListModule\Controls\TodoListDefinition\ITodoListDefinitionControlFactory
+	- \App\TodoListModule\Controls\EditTodoListItem\IEditTodoListItemControlFactory

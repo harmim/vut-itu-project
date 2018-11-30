@@ -33,7 +33,7 @@ final class AssignedTodoListsControl extends \ITU\Application\UI\BaseControl
 			'todoLists',
 			$this->todoListService->fetchAll(function (\Nette\Database\Table\Selection $selection): void {
 				$selection->where('user_id', $this->user->getId());
-				$selection->order('id');
+				$selection->order('id DESC');
 			})
 		);
 		$this->getTemplate()->add(

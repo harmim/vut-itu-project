@@ -41,7 +41,6 @@ final class UserListControl extends \ITU\Application\UI\BaseControl
 	 */
 	public function handleDelete(int $id): void
 	{
-		$this->checkPermission();
 		$this->checkSelfModification($id);
 		$this->userService->delete($id);
 		$this->redirect('this');
@@ -54,7 +53,6 @@ final class UserListControl extends \ITU\Application\UI\BaseControl
 	 */
 	public function handleChangeRole(int $id, string $role): void
 	{
-		$this->checkPermission();
 		$this->checkSelfModification($id);
 		try {
 			$this->userService->changeRole($id, $role);
@@ -65,21 +63,6 @@ final class UserListControl extends \ITU\Application\UI\BaseControl
 			}
 		}
 		$this->redirect('this');
-	}
-
-
-	/**
-	 * @throws \Nette\Application\AbortException
-	 */
-	private function checkPermission(): void
-	{
-		if (!$this->user->isInRole(\App\UserModule\Model\UserService::ROLE_ADMIN)) {
-			$presenter = $this->getPresenter();
-			if ($presenter) {
-				$presenter->flashMessage('Access denied.', 'error');
-				$presenter->redirect(':Core:Homepage:default');
-			}
-		}
 	}
 
 

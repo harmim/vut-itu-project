@@ -21,7 +21,7 @@ final class TodoListService extends \ITU\Model\BaseService
 	}
 
 
-	public function getTableName(): string
+	public static function getTableName(): string
 	{
 		return 'todo_list';
 	}

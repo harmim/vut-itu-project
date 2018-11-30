@@ -62,10 +62,10 @@ final class AddTodoListControl extends \ITU\Application\UI\BaseControl
 		if ($presenter) {
 			if ($success) {
 				$presenter->flashMessage('Student has been successfully assigned.', 'success');
+				$presenter->redirect('this');
 			} else {
 				$presenter->flashMessage('Assignment of student failed.', 'error');
 			}
-			$presenter->redirect('this');
 		}
 	}
 }

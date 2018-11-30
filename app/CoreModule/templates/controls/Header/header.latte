@@ -12,13 +12,18 @@
 		<ul class="navbar-nav mr-auto">
 			{if $user->isLoggedIn()}
 				<li n:class="nav-item, $presenter->isLinkCurrent(':TodoList:TodoList:list') ? active">
-					<a class="nav-link" href="{plink ':TodoList:TodoList:list'}">Assigned students</a>
+					<a class="nav-link" href="{plink :TodoList:TodoList:list}">Assigned students</a>
 				</li>
 
-				<li n:if="$user->isInRole(\App\UserModule\Model\UserService::ROLE_ADMIN)"
-					n:class="nav-item, $presenter->isLinkCurrent(':User:User:list') ? active">
-					<a class="nav-link" href="{plink :User:User:list}">Users</a>
-				</li>
+				{if $user->isInRole(\App\UserModule\Model\UserService::ROLE_ADMIN)}
+					<li n:class="nav-item, $presenter->isLinkCurrent(':TodoList:TodoList:definition') ? active">
+						<a class="nav-link" href="{plink :TodoList:TodoList:definition}">TODO list definition</a>
+					</li>
+
+					<li n:class="nav-item, $presenter->isLinkCurrent(':User:User:list') ? active">
+						<a class="nav-link" href="{plink :User:User:list}">Users</a>
+					</li>
+				{/if}
 			{else}
 				<li n:class="nav-item, $presenter->isLinkCurrent(':User:Registration:default') ? active">
 					<a class="nav-link" href="{plink :User:Registration:default}">Registration</a>
