@@ -41,4 +41,15 @@ final class TodoListGlobalItemDoneService extends \ITU\Model\BaseService
 
 		return (bool) $this->getTable()->insert($globalItemDoneData);
 	}
+
+
+	/**
+	 * @throws \Nette\InvalidArgumentException
+	 */
+	public function check(int $id, int $todoListId, bool $done): void
+	{
+		$this->getTable()->where('todo_list_global_item_id', $id)->where('todo_list_id', $todoListId)->update([
+			'done' => $done,
+		]);
+	}
 }

@@ -32,4 +32,15 @@ final class TodoListItemService extends \ITU\Model\BaseService
 			'name' => $name,
 		]);
 	}
+
+
+	/**
+	 * @throws \Nette\InvalidArgumentException
+	 */
+	public function check(int $id, bool $done): void
+	{
+		$this->getTable()->wherePrimary($id)->update([
+			'done' => $done,
+		]);
+	}
 }

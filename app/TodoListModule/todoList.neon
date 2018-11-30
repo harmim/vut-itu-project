@@ -11,3 +11,5 @@ services:
 	- \App\TodoListModule\Controls\AddTodoListItem\IAddTodoListItemControlFactory
 	- \App\TodoListModule\Controls\TodoListDefinition\ITodoListDefinitionControlFactory
 	- \App\TodoListModule\Controls\EditTodoListItem\IEditTodoListItemControlFactory
+	- \App\TodoListModule\Controls\EditTodoList\IEditTodoListControlFactory
+	- \App\TodoListModule\Controls\TodoList\ITodoListControlFactory

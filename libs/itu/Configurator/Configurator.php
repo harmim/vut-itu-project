@@ -16,10 +16,10 @@ final class Configurator extends \Nette\Configurator
 		parent::__construct();
 		$this->addParameters([
 			'rootDir' => $rootDir,
-			'appDir' => "$rootDir/app",
-			'logDir' => "$rootDir/log",
-			'tempDir' => "$rootDir/temp",
-			'wwwDir' => "$rootDir/www",
+			'appDir' => $rootDir . \DIRECTORY_SEPARATOR . 'app',
+			'logDir' => $rootDir . \DIRECTORY_SEPARATOR . 'log',
+			'tempDir' => $rootDir . \DIRECTORY_SEPARATOR . 'temp',
+			'wwwDir' => $rootDir . \DIRECTORY_SEPARATOR . 'www',
 			self::CONFIG_KEY_IS_PRODUCTION_DOMAIN => \ITU\Configurator\Helpers::detectProductionDomain(),
 		]);
 	}

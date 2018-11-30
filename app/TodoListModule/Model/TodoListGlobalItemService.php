@@ -60,4 +60,13 @@ final class TodoListGlobalItemService extends \ITU\Model\BaseService
 			'name' => $name,
 		]);
 	}
+
+
+	/**
+	 * @throws \Nette\InvalidArgumentException
+	 */
+	public function check(int $id, int $todoListId, bool $done): void
+	{
+		$this->todoListGlobalItemDoneService->check($id, $todoListId, $done);
+	}
 }

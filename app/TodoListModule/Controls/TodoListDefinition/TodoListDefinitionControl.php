@@ -38,7 +38,12 @@ final class TodoListDefinitionControl extends \ITU\Application\UI\BaseControl
 	public function handleDelete(int $id): void
 	{
 		$this->todoListGlobalItemService->delete($id);
-		$this->redirect('this');
+
+		$presenter = $this->getPresenter();
+		if ($presenter) {
+			$presenter->flashMessage('Item has been successfully deleted.', 'success');
+			$presenter->redirect('this');
+		}
 	}
 
 
@@ -49,12 +54,20 @@ final class TodoListDefinitionControl extends \ITU\Application\UI\BaseControl
 	{
 		$presenter = $this->getPresenter();
 		if ($presenter && $presenter->isAjax()) {
-			$parameters = $presenter->getParameters();
-			if (isset($parameters['itemId'], $parameters['prevItemId'], $parameters['nextItemId'])) {
+			try {
+				$data = \Nette\Utils\Json::decode(
+					$presenter->getHttpRequest()->getRawBody(),
+					\Nette\Utils\Json::FORCE_ARRAY
+				);
+			} catch (\Nette\Utils\JsonException $e) {
+				$data = [];
+			}
+
+			if (isset($data['itemId'])) {
 				$this->todoListGlobalItemService->sort(
-					(int) $parameters['itemId'],
-					$parameters['prevItemId'] ? (int) $parameters['prevItemId'] : null,
-					$parameters['nextItemId'] ? (int) $parameters['nextItemId'] : null
+					(int) $data['itemId'],
+					isset($data['prevItemId']) ? (int) $data['prevItemId'] : null,
+					isset($data['nextItemId']) ? (int) $data['nextItemId'] : null
 				);
 			}
 		}

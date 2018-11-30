@@ -1,0 +1,29 @@
+{default $title = 'TODO list'}
+
+{block content}
+
+<div class="row">
+	<div class="col">
+		<h4 class="mb-3">TODO list for student: <i>{$todoList->name}</i></h4>
+
+		<hr class="mb-3">
+
+		{control editTodoList}
+
+		<hr class="mb-3">
+
+		<h5 class="mb-3">Global TODO list</h5>
+
+		{control todoListGlobal}
+
+		<hr class="mb-3">
+
+		<h5 class="mb-3">Personal TODO list</h5>
+
+		{control addTodoListItem}
+
+		<hr class="mb-3">
+
+		{control todoList}
+	</div>
+</div>

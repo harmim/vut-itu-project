@@ -12,9 +12,14 @@ final class TodoListPresenter extends \App\CoreModule\Presenters\SecuredPresente
 	private $editedItem;
 
 	/**
+	 * @var \Nette\Database\Table\ActiveRow|null
+	 */
+	private $editedTodoList;
+
+	/**
 	 * @var \App\TodoListModule\Controls\AddTodoList\IAddTodoListControlFactory
 	 */
-	private $todoListControlFactory;
+	private $addTodoListControlFactory;
 
 	/**
 	 * @var \App\TodoListModule\Controls\AssignedTodoLists\IAssignedTodoListsControlFactory
@@ -46,29 +51,69 @@ final class TodoListPresenter extends \App\CoreModule\Presenters\SecuredPresente
 	 */
 	private $editTodoListItemControlFactory;
 
+	/**
+	 * @var \App\TodoListModule\Model\TodoListService
+	 */
+	private $todoListService;
+
+	/**
+	 * @var \App\TodoListModule\Controls\EditTodoList\IEditTodoListControlFactory
+	 */
+	private $editTodoListControlFactory;
+
+	/**
+	 * @var \App\TodoListModule\Controls\TodoList\ITodoListControlFactory
+	 */
+	private $todoListControlFactory;
+
 
 	public function __construct(
-		\App\TodoListModule\Controls\AddTodoList\IAddTodoListControlFactory $todoListControlFactory,
+		\App\TodoListModule\Controls\AddTodoList\IAddTodoListControlFactory $addTodoListControlFactory,
 		\App\TodoListModule\Controls\AssignedTodoLists\IAssignedTodoListsControlFactory $assignedTodoListsControlFactory,
 		\App\TodoListModule\Controls\AddTodoListItem\IAddTodoListItemControlFactory $addTodoListItemControlFactory,
 		\App\TodoListModule\Controls\TodoListDefinition\ITodoListDefinitionControlFactory $todoListDefinitionControlFactory,
 		\App\TodoListModule\Model\TodoListGlobalItemService $todoListGlobalItemService,
 		\App\TodoListModule\Model\TodoListItemService $todoListItemService,
-		\App\TodoListModule\Controls\EditTodoListItem\IEditTodoListItemControlFactory $editTodoListItemControlFactory
+		\App\TodoListModule\Controls\EditTodoListItem\IEditTodoListItemControlFactory $editTodoListItemControlFactory,
+		\App\TodoListModule\Model\TodoListService $todoListService,
+		\App\TodoListModule\Controls\EditTodoList\IEditTodoListControlFactory $editTodoListControlFactory,
+		\App\TodoListModule\Controls\TodoList\ITodoListControlFactory $todoListControlFactory
 	) {
 		parent::__construct();
-		$this->todoListControlFactory = $todoListControlFactory;
+		$this->addTodoListControlFactory = $addTodoListControlFactory;
 		$this->assignedTodoListsControlFactory = $assignedTodoListsControlFactory;
 		$this->addTodoListItemControlFactory = $addTodoListItemControlFactory;
 		$this->todoListDefinitionControlFactory = $todoListDefinitionControlFactory;
 		$this->todoListGlobalItemService = $todoListGlobalItemService;
 		$this->todoListItemService = $todoListItemService;
 		$this->editTodoListItemControlFactory = $editTodoListItemControlFactory;
+		$this->todoListService = $todoListService;
+		$this->editTodoListControlFactory = $editTodoListControlFactory;
+		$this->todoListControlFactory = $todoListControlFactory;
 	}
 
 
+	/**
+	 * @throws \Nette\Application\BadRequestException
+	 */
 	public function actionDetail(int $id): void
 	{
+		$this->editedTodoList = $this->todoListService->fetchById($id);
+		if (!$this->editedTodoList) {
+			$this->error();
+			return;
+		}
+
+		if ($this->editedTodoList->user_id !== $this->getUser()->getId()) {
+			$this->error();
+			return;
+		}
+	}
+
+
+	public function renderDetail(): void
+	{
+		$this->getTemplate()->add('todoList', $this->editedTodoList);
 	}
 
 
@@ -93,6 +138,7 @@ final class TodoListPresenter extends \App\CoreModule\Presenters\SecuredPresente
 		if ($isGlobalItem && !$this->getUser()->isInRole(\App\UserModule\Model\UserService::ROLE_ADMIN)) {
 			$this->flashMessage('Access denied.', 'error');
 			$this->redirect(':Core:Homepage:default');
+			return;
 		}
 
 		if ($isGlobalItem) {
@@ -105,12 +151,17 @@ final class TodoListPresenter extends \App\CoreModule\Presenters\SecuredPresente
 			$this->error();
 			return;
 		}
+
+		if (!$isGlobalItem && $this->editedItem->todo_list->user_id !== $this->getUser()->getId()) {
+			$this->error();
+			return;
+		}
 	}
 
 
 	protected function createComponentAddTodoList(): \App\TodoListModule\Controls\AddTodoList\AddTodoListControl
 	{
-		return $this->todoListControlFactory->create();
+		return $this->addTodoListControlFactory->create();
 	}
 
 
@@ -139,5 +190,45 @@ final class TodoListPresenter extends \App\CoreModule\Presenters\SecuredPresente
 		}
 
 		return $this->editTodoListItemControlFactory->create($this->editedItem);
+	}
+
+
+	protected function createComponentEditTodoList(): ?\App\TodoListModule\Controls\EditTodoList\EditTodoListControl
+	{
+		if (!$this->editedTodoList) {
+			return null;
+		}
+
+		return $this->editTodoListControlFactory->create($this->editedTodoList);
+	}
+
+
+	protected function createComponentAddTodoListItem(
+	): ?\App\TodoListModule\Controls\AddTodoListItem\AddTodoListItemControl {
+		if (!$this->editedTodoList) {
+			return null;
+		}
+
+		return $this->addTodoListItemControlFactory->create($this->editedTodoList);
+	}
+
+
+	protected function createComponentTodoListGlobal(): ?\App\TodoListModule\Controls\TodoList\TodoListControl
+	{
+		if (!$this->editedTodoList) {
+			return null;
+		}
+
+		return $this->todoListControlFactory->create($this->editedTodoList);
+	}
+
+
+	protected function createComponentTodoList(): ?\App\TodoListModule\Controls\TodoList\TodoListControl
+	{
+		if (!$this->editedTodoList) {
+			return null;
+		}
+
+		return $this->todoListControlFactory->create($this->editedTodoList, false);
 	}
 }

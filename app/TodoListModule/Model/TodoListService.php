@@ -51,7 +51,18 @@ final class TodoListService extends \ITU\Model\BaseService
 
 
 	/**
-	 * @return array['todoListId' => $status]
+	 * @throws \Nette\InvalidArgumentException
+	 */
+	public function update(int $id, string $name): void
+	{
+		$this->getTable()->wherePrimary($id)->update([
+			'name' => $name,
+		]);
+	}
+
+
+	/**
+	 * @return array[$todoListId => $status]
 	 */
 	public function getTodoListsStatuses(int $userId): array
 	{
@@ -85,5 +96,26 @@ final class TodoListService extends \ITU\Model\BaseService
 		}
 
 		return $statuses;
+	}
+
+
+	/**
+	 * @param \Nette\Database\Table\ActiveRow[] $todoListItems
+	 * @return array[$todoListItemId => $done]
+	 */
+	public function getTodoListItemsDone(array $todoListItems, bool $isGlobal, int $todoListId): array
+	{
+		if ($isGlobal) {
+			$todoListGlobalItemsDone = $this->todoListGlobalItemDoneService->fetchAll(
+				function (\Nette\Database\Table\Selection $selection) use ($todoListId): void {
+					$selection->where('todo_list_id', $todoListId);
+				}
+			);
+			$todoListItemsDone = \array_column($todoListGlobalItemsDone, 'done', 'todo_list_global_item_id');
+		} else {
+			$todoListItemsDone = \array_column($todoListItems, 'done', 'id');
+		}
+
+		return $todoListItemsDone;
 	}
 }

@@ -26,6 +26,9 @@ main.todoList = {
 			$tr.find("a").click(function (e) {
 				e.stopPropagation();
 			});
+			$tr.find("input[type=checkbox], label").click(function (e) {
+				e.preventDefault();
+			});
 		}
 	},
 
@@ -48,15 +51,39 @@ main.todoList = {
 		const $label = $tr.find("label");
 
 		if ($checkBox.length > 0 && $label.length > 0) {
-			if ($checkBox.is(":checked")) {
-				$checkBox.prop("checked", false);
-				$tr.removeClass("bg-success text-white");
-				$label.contents().contents().unwrap();
-			} else {
-				$checkBox.prop("checked", true);
-				$tr.addClass("bg-success text-white");
-				$label.wrapInner("<del></del>");
-			}
+			const checkBoxId = $checkBox.attr("id");
+			const checkBoxIdPrefix = "todo-list-";
+			const checkBoxIdGlobalPrefix = "todo-list-global-";
+			const isGlobalItem = checkBoxId.startsWith(checkBoxIdGlobalPrefix);
+			const itemId = parseInt(
+				isGlobalItem
+					? checkBoxId.substr(checkBoxIdGlobalPrefix.length)
+					: checkBoxId.substr(checkBoxIdPrefix.length)
+			);
+			const isChecked = $checkBox.is(":checked");
+
+			$.ajax({
+				url: $tr.closest("table").data("todo-list-check-url"),
+				type: "POST",
+				dataType: "json",
+				contentType: "application/json",
+				data: JSON.stringify({
+					itemId: itemId,
+					isGlobalItem: isGlobalItem,
+					isChecked: !isChecked
+				}),
+				complete: function () {
+					if (isChecked) {
+						$checkBox.prop("checked", false);
+						$tr.removeClass("bg-success text-white");
+						$label.contents().contents().unwrap();
+					} else {
+						$checkBox.prop("checked", true);
+						$tr.addClass("bg-success text-white");
+						$label.wrapInner("<del></del>");
+					}
+				}
+			});
 		}
 	}
 };
@@ -77,23 +104,25 @@ main.sortable = {
 		const itemIdAttr = ui.item.attr("id");
 		const indexOfItem = sortArray.indexOf(itemIdAttr);
 
-		const itemId = parseInt(itemIdAttr.substr(8));
+		const itemIdPrefixLength = "sort-id-".length;
+		const itemId = parseInt(itemIdAttr.substr(itemIdPrefixLength));
 		const prevItemId = typeof sortArray[indexOfItem - 1] !== "undefined"
-			? parseInt(sortArray[indexOfItem - 1].substr(8))
+			? parseInt(sortArray[indexOfItem - 1].substr(itemIdPrefixLength))
 			: null;
 		const nextItemId = typeof sortArray[indexOfItem + 1] !== "undefined"
-			? parseInt(sortArray[indexOfItem + 1].substr(8))
+			? parseInt(sortArray[indexOfItem + 1].substr(itemIdPrefixLength))
 			: null;
 
 		$.ajax({
 			url: $sortable.data("sort-url"),
-			type: "GET",
+			type: "POST",
 			dataType: "json",
-			data: {
+			contentType: "application/json",
+			data: JSON.stringify({
 				itemId: itemId,
 				prevItemId: prevItemId,
 				nextItemId: nextItemId
-			}
+			})
 		});
 	}
 };

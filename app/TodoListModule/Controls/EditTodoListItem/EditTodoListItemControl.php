@@ -55,7 +55,7 @@ final class EditTodoListItemControl extends \ITU\Application\UI\BaseControl
 			if ($this->isGlobalItem) {
 				$backLink = $presenter->link(':TodoList:TodoList:definition');
 			} else {
-				$backLink = $presenter->link(':TodoList:TodoList:detail', $this->item->id);
+				$backLink = $presenter->link(':TodoList:TodoList:detail', $this->item->todo_list_id);
 			}
 		}
 		$this->getTemplate()->add('backLink', $backLink);
