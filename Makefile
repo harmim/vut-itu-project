@@ -127,7 +127,7 @@ clean-cache:
 pack: clean $(PACK).zip
 
 $(PACK).zip:
-	zip -r $@ ./*
+	zip -r $@ * .gitignore .htaccess
 
 
 .PHONY: docker-compose-web
