@@ -93,6 +93,7 @@ final class TodoListControl extends \ITU\Application\UI\BaseControl
 		}
 
 		$this->todoListItemService->delete($id);
+
 		if ($presenter) {
 			$presenter->flashMessage('Item has been successfully deleted.', 'success');
 			$presenter->redirect('this');

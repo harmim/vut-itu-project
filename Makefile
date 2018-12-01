@@ -17,6 +17,8 @@ CODE_CHECKER_VERSION := ^3.0.0
 CODING_STANDARD_VERSION := ^2.0.0
 PHPSTAN_VERSION := ^0.10.5
 
+PACK := xharmi00_41_100_src
+
 DOCKER_WEB := docker-compose exec web
 DOCKER_NODE := docker-compose exec node
 
@@ -114,11 +116,18 @@ phpstan-run: docker-compose-web
 
 .PHONY: clean
 clean:
-	git clean -xdff $(LOG_DIR) $(NODE_DIR) $(TEMP_DIR) $(VENDOR_DIR) $(WWW_DIR)
+	git clean -xdff $(LOG_DIR) $(NODE_DIR) $(TEMP_DIR) $(VENDOR_DIR) $(WWW_DIR) $(PACK).zip
 
 .PHONY: clean-cache
 clean-cache:
 	git clean -xdff $(TEMP_DIR)/cache $(TEMP_DIR)/phpstan-cache
+
+
+.PHONY: pack
+pack: clean $(PACK).zip
+
+$(PACK).zip:
+	zip -r $@ ./*
 
 
 .PHONY: docker-compose-web

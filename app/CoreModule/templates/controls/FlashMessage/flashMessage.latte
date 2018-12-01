@@ -1,4 +1,4 @@
-<div n:snippet="flashMessage" class="row">
+<div class="row">
 	<div n:inner-foreach="$flashes as $flash" class="col-lg-6 offset-lg-3">
 		<div n:class="$flash->type ? 'alert-'.$flash->type, alert, alert-dismissible, fade, show" role="alert">
 			{$flash->message}

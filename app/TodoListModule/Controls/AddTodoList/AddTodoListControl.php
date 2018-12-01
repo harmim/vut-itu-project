@@ -38,7 +38,7 @@ final class AddTodoListControl extends \ITU\Application\UI\BaseControl
 		$form->addSubmit('assign', 'Assign student');
 
 		$form->onSuccess[] = [$this, 'onSuccessAddForm'];
-		$form->onError[] = function (\Nette\Application\UI\Form $form) {
+		$form->onError[] = function (\Nette\Application\UI\Form $form): void {
 			$presenter = $this->getPresenter();
 			if ($presenter) {
 				foreach ($form->getErrors() as $error) {

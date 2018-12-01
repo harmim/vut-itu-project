@@ -28,11 +28,12 @@ final class UserListControl extends \ITU\Application\UI\BaseControl
 	protected function beforeRender(): void
 	{
 		parent::beforeRender();
-
-		$users = $this->userService->fetchAll(function (\Nette\Database\Table\Selection $selection): void {
-			$selection->order('id');
-		});
-		$this->getTemplate()->add('users', $users);
+		$this->getTemplate()->add(
+			'users',
+			$this->userService->fetchAll(function (\Nette\Database\Table\Selection $selection): void {
+				$selection->order('id');
+			})
+		);
 	}
 
 
@@ -43,7 +44,12 @@ final class UserListControl extends \ITU\Application\UI\BaseControl
 	{
 		$this->checkSelfModification($id);
 		$this->userService->delete($id);
-		$this->redirect('this');
+
+		$presenter = $this->getPresenter();
+		if ($presenter) {
+			$presenter->flashMessage('User has been successfully deleted.', 'success');
+			$presenter->redirect('this');
+		}
 	}
 
 

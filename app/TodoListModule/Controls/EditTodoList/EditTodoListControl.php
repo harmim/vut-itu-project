@@ -55,7 +55,7 @@ final class EditTodoListControl extends \ITU\Application\UI\BaseControl
 		$form->addSubmit('edit', 'Rename student');
 
 		$form->onSuccess[] = [$this, 'onSuccessEditForm'];
-		$form->onError[] = function (\Nette\Application\UI\Form $form) {
+		$form->onError[] = function (\Nette\Application\UI\Form $form): void {
 			$presenter = $this->getPresenter();
 			if ($presenter) {
 				foreach ($form->getErrors() as $error) {

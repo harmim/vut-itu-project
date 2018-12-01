@@ -68,7 +68,7 @@ final class UserService extends \ITU\Model\BaseService implements \Nette\Securit
 	 */
 	public function changeRole(int $id, string $role): void
 	{
-		if (!\in_array($role, \array_keys(self::ROLE_TRANSLATION_MAP), true)) {
+		if (!\array_key_exists($role, self::ROLE_TRANSLATION_MAP)) {
 			throw new \App\UserModule\Model\Exception(\sprintf("Invalid role '%s'.", $role));
 		}
 

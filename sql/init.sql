@@ -75,9 +75,10 @@ CREATE TABLE `todo_list_global_item_done` (
 	PRIMARY KEY (`todo_list_global_item_id`, `todo_list_id`),
 	KEY `todo_list_global_item_id` (`todo_list_global_item_id`),
 	KEY `todo_list_id` (`todo_list_id`),
-	CONSTRAINT `todo_list_global_item_done_fk_todo_list_global_item` FOREIGN KEY (`todo_list_global_item_id`) REFERENCES `todo_list_global_item`(`id`)
-		ON DELETE CASCADE
-		ON UPDATE CASCADE,
+	CONSTRAINT `todo_list_global_item_done_fk_todo_list_global_item` FOREIGN KEY (`todo_list_global_item_id`)
+		REFERENCES `todo_list_global_item`(`id`)
+			ON DELETE CASCADE
+			ON UPDATE CASCADE,
 	CONSTRAINT `todo_list_global_item_done_fk_todo_list` FOREIGN KEY (`todo_list_id`) REFERENCES `todo_list`(`id`)
 		ON DELETE CASCADE
 		ON UPDATE CASCADE

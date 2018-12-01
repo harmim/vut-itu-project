@@ -7,7 +7,7 @@
 
 
 ### Dokumentace
-- Technická zpráva projektu: `./doc/xharmi00_tz.pdf`.
+- Technická zpráva projektu: `./doc/xharmi00_41_100_tz.pdf`.
 - Technická zpráva projektu (1. část): `./doc/xharmi00_tz_01.pdf`.
 - Technická zpráva projektu (2. část): `./doc/xharmi00_tz_02.pdf`.
 
@@ -54,7 +54,7 @@ SQL skript pro inicializaci schématu databáze se nachází v [`./sql/init.sql`
 - `./package.json` Definice používaných JavaScript knihoven pro stahování JavaScript a CSS závislostí systému
   nástrojem NPM.
 - `./package-lock.json` Pomocný soubor pro nástroj NPM.
-- `./phpstan.neon` Nastavení nástroje phpstan pro statickou analýzu PHP kódu.
+- `./phpstan.neon` Nastavení nástroje `phpstan` pro statickou analýzu PHP kódu.
 - `./README.md` README se základními informacemi o systému.
 
 
@@ -160,3 +160,4 @@ např. `$ make install PRODUCTION=1`. Výchozí hodnota je `0`.
 - `phpstan` Spuštění statické analýzy PHP kódu.
 - `clean` Odstranení všech dočasných souborů.
 - `clean-cache` Ostranění dočasných souborů Nette framework.
+- `pack` Zabalení projektu pro odevzdání.

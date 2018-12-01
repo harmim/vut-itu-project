@@ -86,6 +86,6 @@ abstract class BasePresenter extends \ITU\Application\UI\BasePresenter
 	{
 		$this->getUser()->logout(true);
 		$this->flashMessage('You have successfully logged out.', 'success');
-		$this->redirect(\Nette\Http\IResponse::S303_SEE_OTHER, ':User:Sign:login');
+		$this->redirect(':User:Sign:login');
 	}
 }
