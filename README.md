@@ -8,8 +8,6 @@
 
 ### Dokumentace
 - Technická zpráva projektu: `./doc/xharmi00_41_100_tz.pdf`.
-- Technická zpráva projektu (1. část): `./doc/xharmi00_tz_01.pdf`.
-- Technická zpráva projektu (2. část): `./doc/xharmi00_tz_02.pdf`.
 
 
 ### Databáze
