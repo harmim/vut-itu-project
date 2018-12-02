@@ -18,6 +18,7 @@ CODING_STANDARD_VERSION := ^2.0.0
 PHPSTAN_VERSION := ^0.10.5
 
 PACK := xharmi00_41_100_src
+PRESENTATION_DIR := presentation
 
 DOCKER_WEB := docker-compose exec web
 DOCKER_NODE := docker-compose exec node
@@ -116,7 +117,9 @@ phpstan-run: docker-compose-web
 
 .PHONY: clean
 clean:
-	git clean -xdff $(LOG_DIR) $(NODE_DIR) $(TEMP_DIR) $(VENDOR_DIR) $(WWW_DIR) $(PACK).zip
+	git clean -xdff $(LOG_DIR) $(NODE_DIR) $(TEMP_DIR) $(VENDOR_DIR) $(WWW_DIR) $(PACK).zip \
+		$(PRESENTATION_DIR)
+	cd $(PRESENTATION_DIR) && make clean
 
 .PHONY: clean-cache
 clean-cache:
@@ -128,6 +131,11 @@ pack: clean $(PACK).zip
 
 $(PACK).zip:
 	zip -r $@ * .gitignore .htaccess
+
+
+.PHONY: presentation
+presentation:
+	cd $(PRESENTATION_DIR) && make
 
 
 .PHONY: docker-compose-web
