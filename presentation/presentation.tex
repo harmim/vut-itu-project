@@ -1,0 +1,116 @@
+\documentclass[10pt, hyperref={unicode}]{beamer}
+
+\usepackage[czech]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{times}
+
+\usetheme[progressbar=frametitle]{metropolis}
+\setbeamertemplate{footline}[frame number]
+
+\title{Tvorba uživatelských rozhraní}
+\subtitle{
+	\texorpdfstring{
+		Projekt\,--\,TODO list pro Buddy členy organizace ESN\\
+		Číslo projektu: 100\\
+		Číslo a~název týmu: 41. Tým xharmi00
+		}{}
+}
+\author[Dominik Harmim \& Vojtěch Hertl]
+{
+	\texorpdfstring{
+		\begin{columns}
+			\column{.45\linewidth}
+			\centering
+			Dominik Harmim\\
+			\texttt{xharmi00@stud.fit.vutbr.cz}
+			\column{.45\linewidth}
+			\centering
+			Vojtěch Hertl\\
+			\texttt{xhertl04@stud.fit.vutbr.cz}
+		\end{columns}
+		\vspace{1cm}
+	}{}
+}
+\date{\today}
+\institute
+{
+	Vysoké učení technické v~Brně\\
+	Fakulta informačních technologií
+
+	\bigskip
+
+	\scalebox{0.3}{\includegraphics{inc/FIT_barevne_CMYK_CZ.pdf}}
+}
+
+\begin{document}
+
+\maketitle
+
+\begin{frame}{Přehled}
+	\setbeamertemplate{section in toc}[sections numbered]
+	\tableofcontents[hideallsubsections]
+\end{frame}
+
+\section{Úvod}
+
+\begin{frame}{Zadání}
+	\begin{alertblock}{Vlastní zadání}
+		\begin{itemize}
+			\item Webová aplikace.
+			\item Speciální typ TODO listu.
+			\item Každý uživatel má několik TODO listů.
+			\item Položky na každém TODO listu je možné definovat
+				globálně administrátorem systému a navíc si každý uživatel
+				může na každý TODO list přidávat i svoje vlastní položky.
+		\end{itemize}
+	\end{alertblock}
+\end{frame}
+
+\begin{frame}{Průzkum kontextu použití}
+	\begin{itemize}
+		\item Při průzkumu cílové skupiny byl použit online dotazník.
+		\item Požadavky na produkt vyplynuly z výsledků dotazníku
+			(jednoduchost, intuitivnost, jazyk aplikace, mobilní zařízení).
+	\end{itemize}
+\end{frame}
+
+\section{Návrh a testování}
+
+\begin{frame}{Návrh UI}
+	\begin{itemize}
+		\item Sdílení nápadů v týmu.
+		\item Klíčové prvky:
+			\begin{itemize}
+				\item Výpis všech TODO listů daného uživatele.
+				\item Práce s TODO listem
+				\item Definice položek TODO listu.
+			\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Prototyp a uživatelské testování}
+\end{frame}
+
+\section{Implementace}
+
+\begin{frame}{Back-end implementace}
+	\begin{itemize}
+		\item Implementace v jazyce PHP za použití Nette Framework.
+		\item Použití MySQL databáze.
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Front-end implementace}
+	\begin{itemize}
+		\item HTML\,--\,vytvoření obsahu stránek.
+		\item CSS\,--\,responsivní stylování HTML.
+		\item JavaScript\,--\,dynamický obsah a validace.
+		\item Použití knihovny Bootstrap.
+		\item Demo Dominik Harmim
+			\texttt{http://vut-itu-project.harmim.cz}.
+		\item Demo Vojtěch Hertl
+			\texttt{http://vut-itu-project-hertl.harmim.cz}.
+	\end{itemize}
+\end{frame}
+
+\end{document}
